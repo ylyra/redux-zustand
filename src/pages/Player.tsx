@@ -3,13 +3,11 @@ import { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Module } from '../components/Module'
 import { Video } from '../components/Video'
-import { useAppDispatch, useAppSelector, useCurrentLesson } from '../store'
-import { loadCourse } from '../store/slices/player'
+import { useCurrentLesson, useStore } from '../zustand-store'
 
 export function Player() {
-  const dispatch = useAppDispatch()
+  const { course, load } = useStore()
   const { currentLesson } = useCurrentLesson()
-  const modules = useAppSelector((state) => state.player.course?.modules)
 
   useEffect(() => {
     if (!currentLesson) return
@@ -18,7 +16,7 @@ export function Player() {
   }, [currentLesson, currentLesson?.title])
 
   useEffect(() => {
-    dispatch(loadCourse())
+    load()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -40,7 +38,7 @@ export function Player() {
           </div>
 
           <aside className="absolute bottom-0 right-0 top-0 w-80 divide-y-2 divide-zinc-900 overflow-y-auto border-l border-zinc-800 bg-zinc-900 scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800">
-            {modules?.map((module, index) => (
+            {course?.modules?.map((module, index) => (
               <Module
                 title={module.title}
                 lessonsAmount={module.lessons.length}

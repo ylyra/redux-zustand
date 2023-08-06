@@ -1,8 +1,8 @@
-import { useAppSelector, useCurrentLesson } from '../../store'
+import { useCurrentLesson, useStore } from '../../zustand-store'
 
 export function Header() {
   const { currentLesson, currentModule } = useCurrentLesson()
-  const isCourseLoading = useAppSelector((state) => state.player.isLoading)
+  const { isLoading: isCourseLoading } = useStore()
 
   if (!currentLesson || !currentModule || isCourseLoading)
     return <h1 className="text-2xl font-bold">Carregando</h1>

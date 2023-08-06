@@ -1,15 +1,13 @@
 import { Loader } from 'lucide-react'
 import Player from 'react-player'
-import { useAppDispatch, useAppSelector, useCurrentLesson } from '../../store'
-import { next } from '../../store/slices/player'
+import { useCurrentLesson, useStore } from '../../zustand-store'
 
 export function Video() {
-  const dispatch = useAppDispatch()
   const { currentLesson } = useCurrentLesson()
-  const isCourseLoading = useAppSelector((state) => state.player.isLoading)
+  const { isLoading: isCourseLoading, next } = useStore()
 
   const handlePlayNext = () => {
-    dispatch(next())
+    next()
   }
 
   return (
