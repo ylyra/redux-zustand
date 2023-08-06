@@ -1,10 +1,9 @@
 import Player from 'react-player'
-import { useDispatch } from 'react-redux'
-import { useCurrentLesson } from '../../store'
+import { useAppDispatch, useCurrentLesson } from '../../store'
 import { next } from '../../store/slices/player'
 
 export function Video() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { currentLesson } = useCurrentLesson()
 
   const handlePlayNext = () => {
@@ -17,7 +16,7 @@ export function Video() {
         width="100%"
         height="100%"
         controls
-        url={`https://www.youtube.com/watch?v=${currentLesson.id}`}
+        url={`https://www.youtube.com/watch?v=${currentLesson?.id}`}
         onEnded={handlePlayNext}
         playing
         light
