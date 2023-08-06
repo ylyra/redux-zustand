@@ -2,7 +2,7 @@ import { useCurrentLesson, useStore } from '../../zustand-store'
 
 export function Header() {
   const { currentLesson, currentModule } = useCurrentLesson()
-  const { isLoading: isCourseLoading } = useStore()
+  const isCourseLoading = useStore((state) => state.isLoading)
 
   if (!currentLesson || !currentModule || isCourseLoading)
     return <h1 className="text-2xl font-bold">Carregando</h1>
