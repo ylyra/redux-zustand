@@ -1,9 +1,11 @@
-import { useCurrentLesson } from '../../store'
+import { useAppSelector, useCurrentLesson } from '../../store'
 
 export function Header() {
   const { currentLesson, currentModule } = useCurrentLesson()
+  const isCourseLoading = useAppSelector((state) => state.player.isLoading)
 
-  if (!currentLesson || !currentModule) return <span />
+  if (!currentLesson || !currentModule || isCourseLoading)
+    return <h1 className="text-2xl font-bold">Carregando</h1>
 
   return (
     <div className="flex flex-col space-y-1">
