@@ -2,8 +2,11 @@ import { MessageCircle } from 'lucide-react'
 import { Header } from '../components/Header'
 import { Module } from '../components/Module'
 import { Video } from '../components/Video'
+import { useAppSelector } from '../store'
 
 export function Player() {
+  const modules = useAppSelector((state) => state.player.course.modules)
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-950 text-zinc-50">
       <div className="flex w-full max-w-[1100px] flex-col space-y-6 px-6">
@@ -21,32 +24,15 @@ export function Player() {
             <Video />
           </div>
 
-          <aside className="absolute bottom-0 right-0 top-0 w-80 divide-y-2 divide-zinc-900 overflow-y-scroll border-l border-zinc-800 bg-zinc-900 scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800">
-            <Module
-              title="Desvendando o Redux"
-              lessonsAmount={10}
-              moduleIndex={0}
-            />
-            <Module
-              title="Desvendando o Redux"
-              lessonsAmount={10}
-              moduleIndex={1}
-            />
-            <Module
-              title="Desvendando o Redux"
-              lessonsAmount={10}
-              moduleIndex={2}
-            />
-            <Module
-              title="Desvendando o Redux"
-              lessonsAmount={10}
-              moduleIndex={3}
-            />
-            <Module
-              title="Desvendando o Redux"
-              lessonsAmount={10}
-              moduleIndex={4}
-            />
+          <aside className="absolute bottom-0 right-0 top-0 w-80 divide-y-2 divide-zinc-900 overflow-y-auto border-l border-zinc-800 bg-zinc-900 scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800">
+            {modules.map((module, index) => (
+              <Module
+                title={module.title}
+                lessonsAmount={module.lessons.length}
+                moduleIndex={index}
+                key={`module-${module.id}`}
+              />
+            ))}
           </aside>
         </main>
       </div>
