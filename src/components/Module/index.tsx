@@ -12,6 +12,14 @@ interface Props {
 }
 
 export function Module({ lessonsAmount, title, moduleIndex }: Props) {
+  const { currentLessonIndex, currentModuleIndex } = useAppSelector((state) => {
+    const { currentModuleIndex, currentLessonIndex } = state.player
+
+    return {
+      currentModuleIndex,
+      currentLessonIndex,
+    }
+  })
   const lessons = useAppSelector(
     (state) => state.player.course.modules[moduleIndex].lessons,
   )
@@ -40,6 +48,10 @@ export function Module({ lessonsAmount, title, moduleIndex }: Props) {
               title={lesson.title}
               duration={lesson.duration}
               onPlay={() => dispatch(play([moduleIndex, lessonIndex]))}
+              isCurrent={
+                currentModuleIndex === moduleIndex &&
+                currentLessonIndex === lessonIndex
+              }
             />
           ))}
         </nav>
