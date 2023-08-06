@@ -16,7 +16,14 @@ export function Player() {
           </button>
         </div>
 
-        <main></main>
+        <main className='relative flex overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 shadow'>
+          <div className='flex-1'>
+            video
+          </div>
+          <aside className='w-full min-w-[300px] max-w-[320px] border-l border-zinc-800 bg-zinc-900 h-[600px]'>
+
+          </aside>
+        </main>
       </div>
     </div>
   )
